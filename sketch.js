@@ -1,10 +1,25 @@
 let flip = 0;
-let i = 1;
-let i2 = 1;
+let i = 1; // increases when mouse is clicked
+let i2 = 1; // increases when purr
+
+let meow;
+
+function preload() {
+  meow = loadSound('meow.wav');
+}
 
 function setup() {
   createCanvas(400, 400);
 }
+
+function draw() {
+  background(125,10);
+}
+
+// when mouse is clicked, 
+///increase i
+//if i is even, meow
+//if i is odd, trigger coinFlip (either purr or hiss)
 
 
 function mousePressed() {
@@ -14,6 +29,7 @@ function mousePressed() {
   //coinFlip();
   if (i % 2 == 0) {
     text('speaker 1 meow', 50, 50);
+    meow.play();
     //console.log('no flip');
   } else if (i % 2 == 1) {
     coinFlip();
@@ -23,10 +39,7 @@ function mousePressed() {
 }
 
 
-function draw() {
-  background(125,10);
 
-}
 //note: i need it to only run coinFlip when its not running meow
 // but somehow running it under "else" breaks it?
 // oh somehow its running it continuously instead of once
@@ -36,6 +49,10 @@ function draw() {
 
 // sometimes theres a glitch where meow and flip play at the same time
 
+
+//50 percent chance of purr or hiss
+//if purr, increase i2 by one
+//when i2 is greater than 5, signal the end of the performance
 
 function coinFlip() {
   var flip = random(100);
