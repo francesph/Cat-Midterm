@@ -1,5 +1,6 @@
 let flip = 0;
-let counter = 1;
+let i = 1;
+let i2 = 1;
 
 function setup() {
   createCanvas(400, 400);
@@ -7,13 +8,14 @@ function setup() {
 
 
 function mousePressed() {
-  counter = counter + 1
+  i = i + 1
+  console.log(i);
   //console.log('click');
   //coinFlip();
-  if (counter % 2 == 0) {
+  if (i % 2 == 0) {
     text('speaker 1 meow', 50, 50);
     //console.log('no flip');
-  } else if (counter % 2 == 1) {
+  } else if (i % 2 == 1) {
     coinFlip();
     //console.log(counter % 2);
     //console.log('flip');
@@ -41,15 +43,18 @@ function coinFlip() {
   if (flip < 50) {
     text('speaker 1 purr', 50, 80);
     console.log('purr')
+    i2++
   } else {
       text('speaker 1 hiss', 50, 90);
       console.log('hiss')
   }
+
+  if (i2 > 5) {
+    console.log('finish');
+  }
 }
 
-if (counter > 10) {
-  console.log('finish')
-}
+
 
 
 
