@@ -38,6 +38,16 @@ function mousePressed() {
   }
 }
 
+// if a key is pressed, send a 1 second long note
+function keyPressed() {
+  // Send a MIDI note on message
+  outputDevice.send([144, 60, 127]); // Note on, middle C, velocity 127
+
+  // After a delay, send a MIDI note off message
+  setTimeout(function() {
+    outputDevice.send([128, 60, 0]); // Note off, middle C
+  }, 1000); // 1000 milliseconds == 1 second
+}
 
 
 //note: i need it to only run coinFlip when its not running meow
