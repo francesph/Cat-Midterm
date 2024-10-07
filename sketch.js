@@ -44,24 +44,20 @@ function mousePressed() {
   //coinFlip();
   if (i % 2 == 0) {
     text('speaker 1 meow', 50, 50);
-    meow.play();
+      // Send a MIDI note on message
+    outputDevice.send([176, 1, 127]); // Note on, middle C, velocity 127
+
+  // After a delay, send a MIDI note off message
+    setTimeout(function() {
+      outputDevice.send([176, 1, 0]); // Note off, middle C
+    }, 1000); // 1000 milliseconds == 1 second
+    //meow.play();
     //console.log('no flip');
   } else if (i % 2 == 1) {
     coinFlip();
     //console.log(counter % 2);
     //console.log('flip');
   }
-}
-
-// if a key is pressed, send a 1 second long note
-function keyPressed() {
-  // Send a MIDI note on message
-  outputDevice.send([144, 60, 127]); // Note on, middle C, velocity 127
-
-  // After a delay, send a MIDI note off message
-  setTimeout(function() {
-    outputDevice.send([128, 60, 0]); // Note off, middle C
-  }, 1000); // 1000 milliseconds == 1 second
 }
 
 
@@ -85,10 +81,22 @@ function coinFlip() {
   if (flip < 50) {
     text('speaker 1 purr', 50, 80);
     console.log('purr')
+    outputDevice.send([176, 2, 127]); // Note on, middle C, velocity 127
+
+  // After a delay, send a MIDI note off message
+    setTimeout(function() {
+      outputDevice.send([176, 2, 0]); // Note off, middle C
+    }, 1000); // 1000 milliseconds == 1 second
     i2++
   } else {
       text('speaker 1 hiss', 50, 90);
       console.log('hiss')
+      outputDevice.send([176, 3, 127]); // Note on, middle C, velocity 127
+
+      // After a delay, send a MIDI note off message
+        setTimeout(function() {
+          outputDevice.send([176, 3, 0]); // Note off, middle C
+        }, 1000); // 1000 milliseconds == 1 second
   }
 
   if (i2 > 5) {
