@@ -4,6 +4,9 @@ let i2 = 1; // increases when purr
 
 let meow;
 
+let outputDevice; // will reference the first available MIDI output device
+let modVal; // value of the modwheel control change to send
+
 function preload() {
   meow = loadSound('meow.wav');
 }
@@ -11,6 +14,18 @@ function preload() {
 function setup() {
   createCanvas(400, 400);
 }
+
+  // try to setup WebMIDI and set outputDevice to the first available device
+  navigator.requestMIDIAccess()
+  .then(function(midiAccess) {
+    // Get the first available MIDI output port
+    outputDevice = midiAccess.outputs.values().next().value;
+  })
+  .catch(function(error) {
+    console.error("Error accessing MIDI devices");
+    //console.error(error);
+  });
+
 
 function draw() {
   background(125,10);
