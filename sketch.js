@@ -59,16 +59,7 @@ function mousePressed() {
     //console.log('flip');
   }
 }
-
-
-//note: i need it to only run coinFlip when its not running meow
-// but somehow running it under "else" breaks it?
-// oh somehow its running it continuously instead of once
-// oh because its the draw function *facepalm*
-// i moved it to mousePressed but now it doesnt start with meow
-// i made it start at 1 instead of 0 and that fixed it
-
-// sometimes theres a glitch where meow and flip play at the same time
+// sometimes theres a glitch where meow and flip play at the same time on the first input
 
 
 //50 percent chance of purr or hiss
@@ -104,10 +95,6 @@ function coinFlip() {
   }
 }
 
-
-
-
-
 /* 
 play meow
 if input
@@ -119,3 +106,42 @@ when purr counter hits 10, indicate the performance is over
 */
 
 
+// switching speakers
+
+// when the coresponding key is pressed,
+// send midi output for that speaker
+// turn off midi output for all the other speakers
+
+function keyPressed() {
+  if (key === '1') {
+    text('speaker 1 on', 30, 200);
+    outputDevice.send([176, 4, 127]);
+    outputDevice.send([176, 5, 0]);
+    outputDevice.send([176, 6, 0]);
+    outputDevice.send([176, 7, 0]);
+  } else if (key === '2') {
+    text('speaker 2 on', 120, 200);
+    outputDevice.send([176, 4, 0]);
+    outputDevice.send([176, 5, 127]);
+    outputDevice.send([176, 6, 0]);
+    outputDevice.send([176, 7, 0]);
+  } else if (key === '3') {
+    text('speaker 3 on', 210, 200);
+    outputDevice.send([176, 4, 0]);
+    outputDevice.send([176, 5, 0]);
+    outputDevice.send([176, 6, 127]);
+    outputDevice.send([176, 7, 0]);
+  } else if (key === '4') {
+    text('speaker 4 on', 290, 200);
+    outputDevice.send([176, 4, 0]);
+    outputDevice.send([176, 5, 0]);
+    outputDevice.send([176, 6, 0]);
+    outputDevice.send([176, 7, 127]);
+  }
+}
+
+/*
+ it would be nice if i could have the text for this one not fade away
+ but scared moving it to draw function will break it
+ i'll test later
+ */
